@@ -1,0 +1,213 @@
+body, html {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-image: url('bullet-journal-page.jpg')
+}
+
+#heading {
+  background-color: coral;
+  height: 150px;
+  width: 100%;
+  margin: 0px;
+  text-align: center;
+  font-family: 'Zeyada', cursive;
+  font-size: 35px;
+}
+
+
+
+h1 {
+  margin-top: 0px;
+  line-height: 150px;
+  font-family: 'Zeyada', cursive;
+}
+
+#title2 {
+  display: inline;
+  margin-left: 30%;
+  font-size: 50px;
+  
+}
+
+
+
+#happy-moments-link {
+  margin-top: 400px;
+  margin-left: 70px;
+  font-family: 'Zeyada', cursive;
+  font-size: 25px;
+}
+
+#heart {
+  color: red;
+}
+
+.daily-journal-title, #date {
+  font-size: 40px;
+  font-family: 'Zeyada', cursive;
+  font-weight: bold;
+}
+
+#date {
+  color: aqua;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.left {
+ width: 30%;
+ display: inline;
+ flex: 1;
+ padding-top: 125px;
+}
+
+.middle {
+  width: 40%;
+  display: inline;
+  flex: 1;
+  padding-left: 30px;
+}
+
+.right {
+  width: 30%;
+  display: inline;
+  flex: 1;
+  text-align: center;
+  font-family: 'Zeyada', cursive;
+  font-size: 25px;
+}
+
+#list {  
+  background-color: azure; 
+}
+
+ul {
+  list-style: none;
+  font-family: 'Zeyada', cursive;
+  font-size: 25px;
+ }
+
+ ul li input[type=text] {
+  display:none;
+  font-family: 'Zeyada', cursive;
+}
+
+ul li.editMode input[type=text] {
+  display:inline-block;
+  font-size: 25px;
+}
+
+ul li.editMode label {
+  display:none;
+}
+
+.checkbox {
+  /* outline: 1px solid blue; */
+    box-shadow: 0 0 1pt 1pt blue;
+    margin-right: 10px;
+}
+
+.circle {
+  color: yellow;
+  font-size: 30px;
+}
+
+
+.delete, .edit {
+  margin-left: 5px;
+}
+
+#save {
+  height: 50px;
+  width: 100px;
+  font-size: 25px;
+  border-radius: 5px;
+  background-color: aqua;
+  margin-bottom: 20px;
+}
+
+.p-journals-header {
+  margin-top: 125px;
+  font-size: 25px;
+}
+
+.dateLink {
+  border: solid aqua;
+  border-radius: 5px;
+  background-color: azure;
+  width: 100px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  /* padding-top: 5px; */
+}
+
+/* monthly-happy.html */
+
+#heading2 {
+  background-color: coral;
+  height: 150px;
+  width: 100%;
+  font-family: 'Zeyada', cursive;
+}
+
+#home {
+  font-size: 25px;
+  margin-left: 200px;
+  text-decoration: none;
+}
+
+.container2 {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.left2 {
+  display: inline;
+  flex: 1;
+  /* text-align: center; */
+  padding-top: 125px;
+  flex-basis: 30%;
+}
+
+.right2 {
+  display: inline;
+  flex: 1;
+  font-family: 'Zeyada', cursive;
+  font-size: 25px;
+  flex-basis: 70%
+}
+
+#month-nav-title {
+  font-size: 30px;
+  margin-left: 200px;
+  font-family: 'Zeyada', cursive;
+}
+
+#month-nav {
+  margin-left: 150px;
+}
+
+.monthLink a {
+  text-decoration: none;
+  color: black;
+}
+
+#current-month-title {
+  margin-left: 100px;
+}
+
+#current-month {
+  color: aqua;
+}
+
+#happy-list {
+  margin-left: 100px;
+  background-color: azure;
+  width: 60%;
+}
