@@ -2,14 +2,11 @@ let nowDate = new Date();
 let currentMonth = nowDate.getMonth();
 const months    = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 let currentMonthInWord = months[currentMonth];
-
 let currentMonthHeading = document.querySelector('#current-month');
 let happyList = document.querySelector('#happy-list');
 let monthNav = document.querySelector('#month-nav');
 
 currentMonthHeading.innerHTML = currentMonthInWord;
-
-
 
 if(localStorage.hasOwnProperty('happyMonths')) {
   let currentStorageValue = localStorage.getItem('happyMonths');
@@ -37,6 +34,10 @@ Object.keys(localStorage).forEach(key => {
   } 
 });
 
+const goToCurrentMonth = () => {
+  location.reload();
+}
+
 const displayMonthlyHappyMoments = (event) => {
   let selectedMonth = event.target.innerHTML;
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -48,7 +49,6 @@ const displayMonthlyHappyMoments = (event) => {
     happyList.removeChild(happyList.firstChild);
    }
 
-     
   Object.keys(localStorage).forEach(key => {
     if(Number(key[0]) && isNaN(Number(key[1]))) {
       if(Number(key[0]) === monthInNum ) {
@@ -65,17 +65,15 @@ const displayMonthlyHappyMoments = (event) => {
       }
      } 
   });
-  let back = document.createElement('button');
-  back.setAttribute("onlick", "goToCurrentMonth()");
-  back.innerHTML = 'Back to current month';
-  let rightCol = document.querySelector('.right2')
-  rightCol.appendChild(back);
+  if(!document.querySelector(".back-to-current-month")) {
+    let back = document.createElement('button');
+    back.setAttribute("onclick", "goToCurrentMonth()");
+    back.innerHTML = 'Back to current month';
+    back.className = "back-to-current-month"
+    let rightCol = document.querySelector('.right2')
+    rightCol.appendChild(back);
+  }
 }
-
-const goToCurrentMonth = () => {
-  
-}
-
 
  const saveToMonthNav = () => {
   let monthNav = document.querySelector('#month-nav');
@@ -90,8 +88,6 @@ const goToCurrentMonth = () => {
     monthLink.className = "monthLink";
     monthLink.setAttribute("onclick", "displayMonthlyHappyMoments(event)");
 
-    console.log('nnnnn', monthLink);
-    
     let storageForMonthNav = localStorage.getItem('happyMonths');
     if(!storageForMonthNav ) {
       storageForMonthNav = monthLink.outerHTML;
@@ -102,7 +98,6 @@ const goToCurrentMonth = () => {
     monthNav.appendChild(monthLink);
   }
 }
-
 
 const isJournalMonth = () => {
   let monthNav = document.querySelector('#month-nav');

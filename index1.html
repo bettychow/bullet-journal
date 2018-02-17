@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="content-page">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My Bullet Journal</title>
+  <script src="https://use.fontawesome.com/26cc39da55.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Zeyada" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+<body class="content-page">
+    <div id="heading2">
+        <a id="home1" href="index.html">Front Cover</a>
+        
+        <h1 id="title1">My Bullet Journal</h1>
+      </div>
+  <div class="container">
+    <div class="left">
+      <a id="happy-moments-link" href="monthly-happy.html">Monthly Happy Moments<span id="heart">&hearts;</span></a>
+     
+    </div>
+    <div class="middle">
+      <h2 class="daily-journal-title">Today is <span id="date"></span></h2>
+      <select name="bullet-menu" id="bullet-menu">
+        <option value="value1">Select a bullet</option>
+        <option value="task">Task</option> 
+        <option value="event">Event</option>
+        <option value="happy-moment">Happy Moment</option>
+      </select>
+      
+      <input type="text" id="content">
+      <button id="add">Add</button>
+      <ul id="list"></ul>
+
+      <h3 id="pic-title">Picture of the day &#8623;</h3>
+      <input id="upload-file" type="file" onchange="previewFile()"><br>
+      <img class="preview" src="" height="200">
+      <button id="save">Save</button>
+    </div>
+    <div class="right">
+      <h2 class="p-journals-header">Previous Journals</h2>
+      <ul id="nav">
+      </ul>
+    </div>
+  </div>
+  
+  <script src="app1.js"></script>
+</body>
+</html>

@@ -1,8 +1,29 @@
-body, html {
+
+.landing-page {
+  background-color: coral;
+  text-align: center;
+}
+.content-page {
   width: 100%;
   padding: 0px;
   margin: 0px;
   background-image: url('bullet-journal-page.jpg')
+}
+
+#landing-page-title {
+  margin-top: 30%;
+  height: 200px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url('bullet-journal-page.jpg');
+  border-radius: 50%;
+  padding-top: 40px;
+  color: black;
+}
+
+a {
+  text-decoration: none;
 }
 
 #heading {
@@ -15,21 +36,24 @@ body, html {
   font-size: 35px;
 }
 
+#home1 {
+  font-size: 25px;
+  text-decoration: none;
+  float: left;
+  margin-top: 100px;
+  margin-left: 80px;
+}
 
+#title1 {
+  font-size: 60px;
+  margin-left: 35%;;
+}
 
 h1 {
   margin-top: 0px;
   line-height: 150px;
   font-family: 'Zeyada', cursive;
 }
-
-#title2 {
-  display: inline;
-  margin-left: 30%;
-  font-size: 50px;
-  
-}
-
 
 
 #happy-moments-link {
@@ -72,6 +96,11 @@ h1 {
   padding-left: 30px;
 }
 
+#pic-title {
+  font-family: 'Zeyada', cursive;
+  font-size: 30px;
+}
+
 .right {
   width: 30%;
   display: inline;
@@ -83,6 +112,7 @@ h1 {
 
 #list {  
   background-color: azure; 
+  width: 100%;
 }
 
 ul {
@@ -121,6 +151,7 @@ ul li.editMode label {
   margin-left: 5px;
 }
 
+
 #save {
   height: 50px;
   width: 100px;
@@ -128,6 +159,7 @@ ul li.editMode label {
   border-radius: 5px;
   background-color: aqua;
   margin-bottom: 20px;
+  display: block;
 }
 
 .p-journals-header {
@@ -147,6 +179,15 @@ ul li.editMode label {
   /* padding-top: 5px; */
 }
 
+#back-to-current-journal {
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+  margin-top: 20px;
+  background-color: aqua;
+  border-radius: 5px;
+}
+
 /* monthly-happy.html */
 
 #heading2 {
@@ -156,10 +197,21 @@ ul li.editMode label {
   font-family: 'Zeyada', cursive;
 }
 
-#home {
+#home2 {
   font-size: 25px;
-  margin-left: 200px;
   text-decoration: none;
+  margin-left: 100px;
+}
+
+#dailies {
+  margin-left: 20px;
+  font-size: 25px;
+}
+
+#title2 {
+  display: inline;
+  margin-left: 20%;
+  font-size: 60px;
 }
 
 .container2 {
@@ -210,4 +262,8 @@ ul li.editMode label {
   margin-left: 100px;
   background-color: azure;
   width: 60%;
+}
+
+.back-to-current-month {
+ margin-left: 100px;
 }
