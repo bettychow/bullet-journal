@@ -1,0 +1,27 @@
+{
+  "name": "bullet-journal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app1.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bettychow/bullet-journal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bettychow/bullet-journal/issues"
+  },
+  "homepage": "https://github.com/bettychow/bullet-journal#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1"
+  }
+}

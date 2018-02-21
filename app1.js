@@ -1,7 +1,49 @@
+const dailyJournal = {};
+
 let nowDate = new Date(); 
 let date = (nowDate.getMonth()+1)+'/'+nowDate.getDate() + '/'+nowDate.getFullYear();
+
+dailyJournal.isJournalDate = function() {
+  let navBar = document.querySelector('#nav');
+  let journalDates = navBar.querySelectorAll('li');
+  // let journalDateExists = false;
+  
+  // journalDates.forEach(journalDate => {
+  //   if(journalDate.innerHTML === date) {
+  //     journalDateExists = true;
+  //   }
+  // });
+  //console.log(journalDateExists);
+  
+  // return journalDateExists;
+
+  return dailyJournal.findJournalDate(journalDates);
+}
+
+
+
+
+dailyJournal.findJournalDate = (journalDates) => {
+  
+  
+  let journalDateExists = false;
+  journalDates.forEach(journalDate => {
+    if(journalDate.innerHTML === date) {
+      journalDateExists = true;
+    }
+  });
+  console.log(journalDateExists);
+  
+  return journalDateExists;
+}
+
+
+
+
+
 let currentDate = document.querySelector('#date');
 currentDate.innerHTML = date;
+console.log('dddd', typeof date);
 
 let landingPageIcon = document.querySelector("#landing-page-title");
 let bulletMenu = document.querySelector('#bullet-menu');
@@ -17,6 +59,24 @@ let navBar = document.querySelector('#nav');
 let happyNav = document.querySelector('#happy-nav');
 let picture = document.querySelector('img');
 let middleCol = document.querySelector('.middle');
+
+console.log('jjjj', navBar.querySelectorAll('li'));
+
+
+dailyJournal.isJournalDate = function() {
+  let navBar = document.querySelector('#nav');
+  let journalDates = navBar.querySelectorAll('li');
+  let journalDateExists = false;
+  
+  journalDates.forEach(journalDate => {
+    if(journalDate.innerHTML === date) {
+      journalDateExists = true;
+    }
+  });
+  console.log(journalDateExists);
+  
+  return journalDateExists;
+}
 
 if(!localStorage.hasOwnProperty(`${date}-idIndex`)) {
   localStorage.setItem(`${date}-idIndex`, idIndex);
@@ -181,7 +241,9 @@ const saveToNav = () => {
   let navBar = document.querySelector('#nav');
   let journalDates = navBar.querySelectorAll('li');
 
-  if (!isJournalDate()) {
+  if (!dailyJournal.isJournalDate()) {
+    console.log(dailyJournal.isJournalDate(date));
+    
     let dateLink = document.createElement('li');
     dateLink.innerHTML = date;
     dateLink.className = "dateLink";
@@ -198,16 +260,18 @@ const saveToNav = () => {
   }
 }
 
-const isJournalDate = () => {
+dailyJournal.isJournalDate = function() {
   let navBar = document.querySelector('#nav');
   let journalDates = navBar.querySelectorAll('li');
   let journalDateExists = false;
-
+  
   journalDates.forEach(journalDate => {
     if(journalDate.innerHTML === date) {
       journalDateExists = true;
     }
   });
+  console.log(journalDateExists);
+  
   return journalDateExists;
 }
 

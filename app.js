@@ -7,8 +7,6 @@ if(!localStorage.hasOwnProperty(`${date}-idIndex`)) {
   localStorage.setItem(`${date}-idIndex`, idIndex);
 }
 
-
-
 if(localStorage.hasOwnProperty(date)) {
   let currentStorageValue = localStorage.getItem(date);
   let frag = document.createRange().createContextualFragment(currentStorageValue);
