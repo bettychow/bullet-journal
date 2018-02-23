@@ -60,7 +60,6 @@ let happyNav = document.querySelector('#happy-nav');
 let picture = document.querySelector('img');
 let middleCol = document.querySelector('.middle');
 
-console.log('jjjj', navBar.querySelectorAll('li'));
 
 
 dailyJournal.isJournalDate = function() {
@@ -159,6 +158,7 @@ const createAndAddNewEntry = () => {
   let deleteButton = document.createElement('button');
 
   editInput.type = 'text';
+  editInput.className = 'editInput';
   editButton.innerHTML = 'Edit';
   editButton.className = 'edit'
   deleteButton.innerHTML = 'Delete';
@@ -195,7 +195,9 @@ const editEntry = (event) => {
 
   if(listItem.className === "editMode") {
     editInput.value = labelContent;
-  } 
+  } else {
+    listItem.querySelector('label').innerHTML = editInput.value;
+  }
 }
 
 const deleteEntry = (event) => {
