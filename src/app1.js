@@ -225,15 +225,21 @@ const save = () => {
   
   updateJournalEntries(items);
   
-  if(preview.src !== 'file:///Users/kitty/Documents/Galvanize/bullet-journal/index1.html' && !currentPic) {
+  if(preview.src !== 'file:///Users/kitty/Documents/Galvanize/bullet-journal/daily-journal.html' && !currentPic) {
+    console.log('1111111', preview.src);
+    
       localStorage.setItem(`${date}-picture`, preview.src);
     }
  
-  if(currentPic  && preview.src === 'file:///Users/kitty/Documents/Galvanize/bullet-journal/index1.html' ) {
+  if(currentPic  && preview.src === 'file:///Users/kitty/Documents/Galvanize/bullet-journal/daily-journal.html' ) {
+    console.log('2222222');
+    
     localStorage.setItem(`${date}-picture`, currentPic.src);
   }
 
-  if(currentPic && preview.src !== 'file:///Users/kitty/Documents/Galvanize/bullet-journal/index1.html') {
+  if(currentPic && preview.src !== 'file:///Users/kitty/Documents/Galvanize/bullet-journal/daily-journal.html') {
+    console.log('3333333');
+    
     localStorage.setItem(`${date}-picture`, preview.src);
   }
   saveToNav();
@@ -332,6 +338,8 @@ const displayJournal = (event) => {
 }
 
 const insertPic = () => {
+  console.log('helllo');
+  
   let dateOfJournal = event.target.textContent;
   let currentPic = document.querySelector('.current-pic');
   let homeButton = document.querySelector('#back-to-current-journal');
