@@ -1,21 +1,14 @@
 
-// { journalEntries: [
-//     { '2012-2-20': [{type: 'task', name: 'Masha', text: ''}, {}, {}] },
-//     { '2012-2-21': [{}, {}, {}] } }
-//     ]
-// }
+let dailyJournal = {};
 
-// // adding to the journal journalEntries
-// // loop through kournalEntries to see if the date journalDateExists
-// // if it does, push onto the array for that date key
-// // if it doesn't, create a new date key
-// // when you're done updating the data, call render
-
-// render() {
-//   // loop through the journal journalEntries
-//   // for each entry, build the DOM around it
-// }
-
+dailyJournal.updateNavBar = (storageForNav) => {
+    if(!storageForNav ) {
+      storageForNav = [date];
+    } else if(!storageForNav.includes(date))  {
+      storageForNav.push(date);
+    }
+    return storageForNav;
+}
 
 let nowDate = new Date(); 
 let date = (nowDate.getMonth()+1)+'/'+nowDate.getDate() + '/'+nowDate.getFullYear();
@@ -28,7 +21,6 @@ let bulletSelected = bulletMenu.options[bulletMenu.selectedIndex].value;
 let content = document.querySelector('#content');
 let list = document.querySelector('#list');
 
-let idIndex = 0;
 let addButton = document.querySelector('#add');
 let saveButton = document.querySelector('#save');
 let deleteButton = document.querySelector('#delete');
@@ -40,17 +32,9 @@ let journalEntries = [];
 let preview = document.querySelector('.preview');
 
 
-
-
-
-if(!localStorage.hasOwnProperty(`${date}-idIndex`)) {
-  localStorage.setItem(`${date}-idIndex`, idIndex);
-}
-
 if(localStorage.hasOwnProperty('journalDates')) {
   let currentStorageArr = JSON.parse(localStorage.getItem('journalDates'));
-  // let frag = document.createRange().createContextualFragment(currentStorageValue);
-  // navBar.appendChild(frag);
+  
   currentStorageArr.forEach(journalDate => {
     let dateLink = document.createElement('li');
     dateLink.innerHTML = journalDate;
@@ -58,7 +42,6 @@ if(localStorage.hasOwnProperty('journalDates')) {
     dateLink.setAttribute("onclick", "displayJournal(event)");
     navBar.appendChild(dateLink);
   });
-  
 }
 
 const renderContent = (entry) => {
@@ -94,9 +77,9 @@ const renderContent = (entry) => {
     return listItem;
 }
 
-if(localStorage.hasOwnProperty(`${date}-journalEntries`)) {
+if(localStorage.hasOwnProperty(`journalEntries-${date}`)) {
   
-  let currentStorageValue = JSON.parse(localStorage.getItem(`${date}-journalEntries`));
+  let currentStorageValue = JSON.parse(localStorage.getItem(`journalEntries-${date}`));
   
   currentStorageValue.forEach(entry => {
     
@@ -108,14 +91,6 @@ if(localStorage.hasOwnProperty(`${date}-journalEntries`)) {
   
     editInput.type = 'text';
     editInput.className = 'editInput';
-
-    // if(item.className === "editMode") {
-    //   let editInput = item.querySelector('input[type=text]');
-    //   item.querySelector('label').innerHTML = editInput.value;
-    //   item.classList.toggle("editMode");
-    // }
-
-
     editButton.innerHTML = 'Edit';
     editButton.className = 'edit'
     deleteButton.innerHTML = 'Delete';
@@ -123,74 +98,21 @@ if(localStorage.hasOwnProperty(`${date}-journalEntries`)) {
     editButton.setAttribute("onclick", "editEntry(event)");
     deleteButton.setAttribute("onclick", "deleteEntry(event)");
 
-    //listItem.appendChild(entryContent);
     listItem.appendChild(editInput);
     listItem.appendChild(editButton);
     listItem.appendChild(deleteButton);
 
     list.appendChild(listItem);
+  });
 
-  })
-
-  
   if(localStorage.getItem(`${date}-picture`)) {
-    
     let picInStore = localStorage.getItem(`${date}-picture`);
     let currentPic = document.createElement('img');
     currentPic.className = 'current-pic'
     currentPic.src = picInStore;
     middleCol.insertBefore(currentPic, saveButton)
   }
-    
 }
-
-
-
-
-const addToStorage = (newEntry) => {
-  let entry = {};
-  let checkbox = newEntry.querySelector('.checkbox');
-  let bullet = newEntry.querySelector('span');
-  let entryContent = newEntry.querySelector('label');
-  
-  if(checkbox) {
-    entry.type = 'uncompleted-task';
-  }
-  
-  if(bullet && bullet.innerHTML === "♥   " ) {
-      entry.type = 'happy-moments';
-  } else if (bullet && bullet.innerHTML === "●   " ) {
-      entry.type = 'event';
-  }
-
-  entry.content = entryContent.innerHTML;
-
-  
-  if(localStorage.hasOwnProperty(`journalEntries-${date}`)) {
-    
-    let journalEntriesStorage = localStorage.getItem(`journalEntries-${date}`)
-    let journalEntriesStorageArr = JSON.parse(journalEntriesStorage);
-    
-    journalEntriesStorageArr.push(entry);
-    localStorage.setItem(`journalEntries-${date}`, JSON.stringify(journalEntriesStorageArr));
-} else {
-    localStorage.setItem(`journalEntries-${date}`, JSON.stringify([entry]));
-}
-
-
-
-  let existingValue =  localStorage.getItem(date);
-  let updatedStorage = '';
-  if(existingValue) {
-    updatedStorage = existingValue += newEntry.outerHTML;
-  } else {
-    updatedStorage = newEntry.outerHTML;
-  }
-  localStorage.setItem(date, updatedStorage);
-}
-
-
-
 
 const createAndAddNewEntry = () => {
   
@@ -198,15 +120,11 @@ const createAndAddNewEntry = () => {
   let bulletSelected = bulletMenu.options[bulletMenu.selectedIndex].value; 
   let list = document.querySelector('#list');
   let newEntry = document.createElement('li');
-  let currentIdIndex = Number(localStorage.getItem(`${date}-idIndex`));
 
   if(bulletSelected === 'task') {
-    currentIdIndex++;
-    localStorage.setItem(`${date}-idIndex`, currentIdIndex);
 
     let checkbox = document.createElement('input');
     checkbox.type = "checkbox";
-    checkbox.id = currentIdIndex;
     checkbox.className = "checkbox";
     checkbox.checked = false;
     checkbox.setAttribute("onclick", "toggleCheckbox(event)");
@@ -240,9 +158,6 @@ const createAndAddNewEntry = () => {
   editButton.setAttribute("onclick", "editEntry(event)");
   deleteButton.setAttribute("onclick", "deleteEntry(event)");
 
-  currentIdIndex++;
-  localStorage.setItem(`${date}-idIndex`, currentIdIndex);
-  entryContent.setAttribute("id", currentIdIndex);
   entryContent.textContent = inputContent;
 
   newEntry.appendChild(entryContent);
@@ -262,20 +177,16 @@ addButton.addEventListener('click', createAndAddNewEntry);
 const toggleCheckbox = (event) => {
   if(!event.target.attributes.checked) {
     event.target.outerHTML = '<input type="checkbox" id="1" class="checkbox" onclick="toggleCheckbox(event)" checked>'
-   // event.target.checked = true;
   } else {
     event.target.outerHTML = '<input type="checkbox" id="1" class="checkbox" onclick="toggleCheckbox(event)">'
-   // event.target.checked = true;
   }
 }
-
 
 const deleteEntry = (event) => {
   list.removeChild(event.target.parentNode);
   let items = list.querySelectorAll('li');
   updateJournalEntries(items);
 }
-
 
 const updateJournalEntries = (items) => {
 
@@ -303,7 +214,7 @@ const updateJournalEntries = (items) => {
     journalEntriesArr.push(entry);
   });
     
-  localStorage.setItem(`${date}-journalEntries`, JSON.stringify(journalEntriesArr));
+  localStorage.setItem(`journalEntries-${date}`, JSON.stringify(journalEntriesArr));
 }
 
 
@@ -311,33 +222,8 @@ const save = () => {
   let items = list.querySelectorAll('li');
   let preview = document.querySelector('.preview');
   let currentPic = document.querySelector('.current-pic');
-  //let journalEntriesArr = [];
   
   updateJournalEntries(items);
-  // items.forEach(item => {
-    
-  //   let entry = {};
-  //   let checkbox = item.querySelector('.checkbox');
-  //   let bullet = item.querySelector('span');
-  //   let entryContent = item.querySelector('label');
-    
-  //   if(checkbox && !checkbox.checked) {
-  //     entry.type = 'uncompleted-task';
-  //   } else if(checkbox && checkbox.checked) {  
-  //     entry.type = 'completed-task';
-  //   }
-    
-  //   if(bullet && bullet.innerHTML === "♥   " ) {
-  //     entry.type = 'happy-moments';
-  //   } else if (bullet && bullet.innerHTML === "●   " ) {
-  //       entry.type = 'event';
-  //   }
-
-  //   entry.content = entryContent.innerHTML;
-  //   journalEntriesArr.push(entry);
-  // });
-    
-  // localStorage.setItem(`${date}-journalEntries`, JSON.stringify(journalEntriesArr));
   
   if(preview.src !== 'file:///Users/kitty/Documents/Galvanize/bullet-journal/index1.html' && !currentPic) {
       localStorage.setItem(`${date}-picture`, preview.src);
@@ -358,6 +244,7 @@ const save = () => {
 saveButton.addEventListener('click', save);
 
 const saveToNav = () => {
+  let date = (nowDate.getMonth()+1)+'/'+nowDate.getDate() + '/'+nowDate.getFullYear();
   let navBar = document.querySelector('#nav');
   let journalDates = navBar.querySelectorAll('li');
 
@@ -368,17 +255,13 @@ const saveToNav = () => {
     dateLink.setAttribute("onclick", "displayJournal(event)");
 
     let storageForNav = JSON.parse(localStorage.getItem('journalDates'));
-    if(!storageForNav ) {
-      storageForNav = [date];
-    } else if(!storageForNav.includes(date))  {
-      storageForNav.push(date);
-    }
+    storageForNav = dailyJournal.updateNavBar(storageForNav, date);
     localStorage.setItem('journalDates', JSON.stringify(storageForNav));
     navBar.insertBefore(dateLink, navBar.childNodes[0]);
   }
 }
 
-isJournalDate = function() {
+const isJournalDate = function() {
   let navBar = document.querySelector('#nav');
   let journalDates = navBar.querySelectorAll('li');
   let journalDateExists = false;
@@ -412,13 +295,8 @@ const goHome = () => {
 
 const displayJournal = (event) => {
   let dateOfJournal = event.target.textContent;
-  console.log('dddddd', dateOfJournal);
-  
-  let currentStorageForList = localStorage.getItem(`${dateOfJournal}-journalEntries`);
+  let currentStorageForList = localStorage.getItem(`journalEntries-${dateOfJournal}`);
   let journalEntiresForTheDate = JSON.parse(currentStorageForList);
-
- // let frag = document.createRange().createContextualFragment(currentStorageForList);
- // let middleCol = document.querySelector('.middle');
   let currentPic = document.querySelector('.current-pic');
   
   document.querySelector('.daily-journal-title').innerHTML = `Date: ${dateOfJournal}`;
@@ -444,19 +322,6 @@ const displayJournal = (event) => {
     list.appendChild(listItem);
   })
 
-  //list.appendChild(frag);
-
-  // let editButton = document.querySelectorAll('.edit');
-  // let deleteButton = document.querySelectorAll('.delete');
-
-  // editButton.forEach(button => {
-  //   button.style = "display: none;";
-  // });
-
-  // deleteButton.forEach(button => {
-  //   button.style = "display: none;";
-  // });
-
   if(currentPic) {
     middleCol.removeChild(currentPic);
   } 
@@ -470,12 +335,7 @@ const insertPic = () => {
   let dateOfJournal = event.target.textContent;
   let currentPic = document.querySelector('.current-pic');
   let homeButton = document.querySelector('#back-to-current-journal');
-  //if(localStorage.hasOwnProperty(`${dateOfJournal}-picture`) && !currentPic ) {
-    // console.log('yyyyyy', localStorage.hasOwnProperty(`${dateOfJournal}-picture`))
-    // let currentStorageForPic = localStorage.getItem(`${dateOfJournal}-picture`);
-    // let frag = document.createRange().createContextualFragment(currentStorageForPic);
-    // middleCol.insertBefore(frag, homeButton);
-
+  
     if(localStorage.getItem(`${dateOfJournal}-picture`)) {
     
       let picInStore = localStorage.getItem(`${dateOfJournal}-picture`);
@@ -484,12 +344,12 @@ const insertPic = () => {
       currentPic.src = picInStore;
       middleCol.insertBefore(currentPic, saveButton)
     }
- // }
+
 }
 
 function previewFile(){
-  var preview = document.querySelector('.preview'); //selects the query named img
-  var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+  var preview = document.querySelector('.preview'); 
+  var file    = document.querySelector('input[type=file]').files[0]; 
   var reader  = new FileReader();
   
   reader.onloadend = function () {
@@ -497,10 +357,10 @@ function previewFile(){
   }
 
   if (file) {
-      reader.readAsDataURL(file); //reads the data as a URL
+      reader.readAsDataURL(file); 
   } else {
       preview.src = "";
   }
 }
 
-previewFile();  //calls the function named previewFile()
+previewFile(); 
