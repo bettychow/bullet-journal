@@ -365,7 +365,7 @@ const insertPic = () => {
       let picInStore = localStorage.getItem(`${dateOfJournal}-picture`);
       let currentPic = document.createElement('img');
       currentPic.className = 'current-pic';
-      currerntPic.height = 200;
+      currentPic.height = 200;
       currentPic.src = picInStore;
       middleCol.insertBefore(currentPic, saveButton)
     }
