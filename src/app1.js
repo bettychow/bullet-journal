@@ -67,6 +67,10 @@ const renderContent = (entry) => {
       bullet.innerHTML = "&#x25CF;   ";
       bullet.setAttribute("style", "color: yellow;");
       listItem.appendChild(bullet);
+    } else if(entry.type === 'gratitude') {
+      bullet.innerHTML = "&#10047;   ";
+      bullet.setAttribute("style", "color: hotpink;");
+      listItem.appendChild(bullet);
     }
 
     let entryContent = document.createElement('label');
@@ -108,14 +112,15 @@ if(localStorage.hasOwnProperty(`journalEntries-${date}`)) {
   if(localStorage.getItem(`${date}-picture`)) {
     let picInStore = localStorage.getItem(`${date}-picture`);
     let currentPic = document.createElement('img');
-    currentPic.className = 'current-pic'
+    currentPic.className = 'current-pic';
+    currentPic.height = 200;
     currentPic.src = picInStore;
     middleCol.insertBefore(currentPic, saveButton)
   }
 }
 
 const createAndAddNewEntry = () => {
-  
+  console.log('heeeeeeeee')
   let bulletMenu = document.querySelector('#bullet-menu');
   let bulletSelected = bulletMenu.options[bulletMenu.selectedIndex].value; 
   let list = document.querySelector('#list');
@@ -141,8 +146,16 @@ const createAndAddNewEntry = () => {
     heart.innerHTML = "&hearts;   ";
     heart.setAttribute("style", "color: red;");
     newEntry.appendChild(heart);
+
+  } else if(bulletSelected === 'gratitude') {
+    let flower = document.createElement('span');
+    flower.innerHTML = "&#10047;   ";
+    flower.setAttribute("style", "color: hotpink;");
+    newEntry.appendChild(flower);
   }
 
+  
+  
   let inputContent = document.querySelector('#content').value;
   let entryContent = document.createElement('label');
   let editInput = document.createElement('input');
@@ -168,6 +181,7 @@ const createAndAddNewEntry = () => {
   if(newEntry.querySelector('label').textContent) {
     list.appendChild(newEntry);
   }
+  console.log('rrr', list);
   content.value = '';
   bulletMenu.selectedIndex = 0;
 }
@@ -208,7 +222,9 @@ const updateJournalEntries = (items) => {
       entry.type = 'happy-moments';
     } else if (bullet && bullet.innerHTML === "●   " ) {
         entry.type = 'event';
-    }
+    } else if (bullet && bullet.innerHTML === "✿   " ) {
+      entry.type = 'gratitude';
+  }
 
     entry.content = entryContent.innerHTML;
     journalEntriesArr.push(entry);
@@ -348,7 +364,8 @@ const insertPic = () => {
     
       let picInStore = localStorage.getItem(`${dateOfJournal}-picture`);
       let currentPic = document.createElement('img');
-      currentPic.className = 'current-pic'
+      currentPic.className = 'current-pic';
+      currerntPic.height = 200;
       currentPic.src = picInStore;
       middleCol.insertBefore(currentPic, saveButton)
     }
